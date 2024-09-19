@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="descriptions">
+  <meta name="keywords" content="keywords">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gaussian Surfels</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script> -->
+  <!-- <meta name="google-site-verification" content="DM3NGsK5CfRuZPtync3hP0EUCJJb_oFfAl_czOaK-PE" /> -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+  <!-- <link rel="stylesheet" href="js/dics/dics.original.css">
+  <script src="js/dics/dics.original.js"></script>
+  <script src="js/event_handler.js"></script> -->
+  <!-- <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:300,400,500,600,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata:300,400,500,600,700" rel="stylesheet"> -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <!-- <link rel="icon" href="./static/images/favicon.svg"> -->
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+
+<body>
+
+  <!-- <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://keunhong.com">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://hypernerf.github.io">
+            HyperNeRF
+          </a>
+          <a class="navbar-item" href="https://nerfies.github.io">
+            Nerfies
+          </a>
+          <a class="navbar-item" href="https://latentfusion.github.io">
+            LatentFusion
+          </a>
+          <a class="navbar-item" href="https://photoshape.github.io">
+            PhotoShape
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav> -->
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+
+            <!-- <h1 class="title is-1 publication-title" style="font-size: 30px; font-weight: bold">
+            
+          </h1> -->
+            <h2 class="title is-3">OmniSR: Shadow Removal under Direct and Indirect Lighting
+              <!-- <span style="color: rgb(235, 83, 71)">S</span><span style="color: rgb(245, 149, 79)">u</span><span style="color: rgb(240, 194, 66)">r</span><span style="color: rgb(159, 206, 99)">f</span><span style="color: rgb(95, 210, 199)">e</span><span style="color: rgb(63, 142, 247)">l</span><span style="color: rgb(151, 112, 247)">s</span></h2> -->
+              <!-- <h2 class="conference">ACM SIGGRAPH 2024</h2> -->
+              <div class="is-size-6 publication-authors">
+                <span class="author-block">
+                  <a href="https://superxjm.github.io/">Jiamin Xu</a><sup>1*</sup>,</span>
+                <span class="author-block">
+                  <a href="/">Zelong Li</a><sup>2*</sup>,</span>
+                <span class="author-block">
+                  <a href="">Yuxin Zheng</a><sup>2</sup>,
+                </span>
+                <span class="author-block">
+                  <a href="">Chenyu Huang</a><sup>2</sup>,
+                </span>
+                <span class="author-block">
+                  <a href="">Renshu Gu</a><sup>2</sup>,
+                </span>
+                <span class="author-block">
+                  <a href="http://www.cad.zju.edu.cn/home/weiweixu/index.htm">Weiwei Xu</a><sup>1<sup>†</sup></sup>
+                </span>
+                <!-- <span class="author-block">
+              <a href="">a6</a><sup>1</sup>
+            </span> -->
+              </div>
+
+              <!-- <div class="is-size-6 publication-authors">
+            <span class="author-block"><sup>*</sup>Joint first authors; </span>
+            <span class="author-block"><sup>†</sup>Corresponding author</span>
+          </div> -->
+
+              <div class="is-size-6 publication-authors">
+                <span class="author-block"><sup>1</sup>Zhejiang University; </span>
+                <span class="author-block"><sup>2</sup>Hangzhou Dianzi University; </span>
+              </div>
+              <br />
+              <!-- <img src="static/images/univ_logo.jpg" class="univ_logo"> -->
+              <div class="columns is-centered">
+
+                <div class="column has-text-centered">
+                  <div class="publication-links">
+                    <!-- PDF Link. -->
+                    <span class="link-block">
+                      <a href="https://arxiv.org/pdf/2404.17774"
+                        class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                          <i class="fas fa-file-pdf"></i>
+                        </span>
+                        <span>Paper</span>
+                      </a>
+                    </span>
+                    <!-- <span class="link-block">
+                <a href="https://arxiv.org/abs/2404.17774"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span> -->
+                    <!-- Video Link. -->
+                    <!-- <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span> -->
+                    <!-- Code Link. -->
+                    <span class="link-block">
+                      <a href="https://github.com/BlackJoke76/OmniSR"
+                        class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                          <i class="fab fa-github"></i>
+                        </span>
+                        <span>Code</span>
+                      </a>
+                    </span>
+                    <!-- Dataset Link. -->
+                    <span class="link-block">
+                      <a href="https://unimelbcloud-my.sharepoint.com/:f:/g/personal/xwwu1_student_unimelb_edu_au/EsdTFxnWonBMojuDmRorijkBCzvmAWA3eaRTn1q4M0axiQ?e=calgJN"
+                        class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                          <i class="far fa-images"></i>
+                        </span>
+                        <span>Data</span>
+                      </a>
+                    </span>
+
+                  </div>
+
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+  </section>
+
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <!-- <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="./static/videos/teaser.mp4"
+                type="video/mp4">
+      </video> -->
+      <!-- <h2 class="subtitle has-text-centered">
+        teaser
+      </h2> -->
+
+      <img src="static/images/teaser.jpg" width="780" height="500">
+    </div>
+  </section>
+
+
+  <!-- 
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-4">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            We propose a novel point-based representation, Gaussian surfels, to combine the advantages of the flexible optimization procedure in 3D Gaussian points and the surface alignment property of surfels. 
+            This is achieved by directly setting the z-scale of 3D Gaussian points to 0, effectively flattening the original 3D ellipsoid into a 2D ellipse. 
+            Such a design provides clear guidance to the optimizer. 
+            By treating the local z-axis as the normal direction, it greatly improves optimization stability and surface alignment. 
+            While the derivatives to the local z-axis computed from the covariance matrix are zero in this setting, we design a self-supervised normal-depth consistency loss to remedy this issue. 
+            We use normal prior and mask supervision to enhance reconstruction robustness against highlights and outliers if available.
+            We propose a volumetric cutting method to aggregate the information of Gaussian surfels so as to remove erroneous points in depth maps generated by alpha blending. 
+            Finally, we apply screened Poisson reconstruction method to the fused depth maps to extract the surface mesh. 
+            Experimental results show that our method demonstrates superior performance in surface reconstruction compared to state-of-the-art neural volume rendering and point-based rendering methods.
+
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-4">Video</h2>
+        <p> Comming soon...</p>
+        <div class="publication-video">
+          <iframe src=""
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+
+  <section class="section">
+    <div class="container is-max-desktop">
+
+      <!-- <div class="columns is-centered">
+
+      <div class="column">
+        <div class="content">
+          <h2 class="title is-4">column</h2>
+          <p>
+            text
+          </p>
+          <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/dollyzoom-stacked.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+
+      <div class="column">
+        <h2 class="title is-4">column</h2>
+        <div class="columns is-centered">
+          <div class="column content">
+            <p>
+              text
+            </p>
+            <video id="matting-video" controls playsinline height="100%">
+              <source src="./static/videos/matting.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+
+        </div>
+      </div>
+    </div> -->
+
+
+      <h2 class="title is-4">Abstract</h2>
+      <div class="content has-text-justified">
+        <p>
+          &nbsp&nbsp&nbsp&nbsp Shadows can originate from occlusions in both direct and indirect illumination.
+          Although most current shadow removal research focuses on shadows caused by direct illumination, shadows from
+          indirect illumination are often just as pervasive, particularly in indoor scenes. A significant challenge in
+          removing shadows from indirect illumination is obtaining shadow-free images to train the shadow removal
+          network.
+          To overcome this challenge, we propose a novel rendering pipeline for generating shadowed and shadow-free
+          images under direct and indirect illumination, and create a comprehensive synthetic dataset that contains over
+          30,000 image pairs, covering various object types and lighting conditions.
+          We also propose an innovative shadow removal network that explicitly integrates semantic and geometric priors
+          through concatenation and attention mechanisms.
+          The experiments show that our method outperforms state-of-the-art shadow removal techniques and can
+          effectively generalize to indoor and outdoor scenes under various lighting conditions, enhancing the overall
+          effectiveness and applicability of shadow removal methods.
+        </p>
+      </div>
+
+      <!-- <br/> -->
+      <h2 class="title is-4">DataSet</h2>
+      <div class="content has-text-justified">
+        <p>
+          The dataset rendered by <a
+            href="https://tianchi.aliyun.com/specials/promotion/alibaba-3d-scene-dataset">3DFront</a> and 
+            <a
+            href="https://objaverse.allenai.org/">Objaverse</a>.
+        </p>
+      </div>
+      <img src="static/images/dataset/4.png" style="width: 960px; height: 500px; ">
+
+      <br /><br />
+
+
+
+      <!-- <div class="columns is-centered">
+      <div class="column is-full-width">
+        <div class="content">
+          <div class="columns is-centered">
+            <div class="column is-full-width">
+              <img src="static/images/compare/bmvs-dog_ours.jpg">
+
+            <br/>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      
+      <div class="column is-full-width">
+        <div class="columns is-centered">
+          <div class="column content">
+            <img src="static/images/compare/bmvs-bear_ours.jpg">
+            <br/>
+
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+      <br />
+      <br />
+
+      
+
+
+      <br />
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-4">Overview</h2>
+          <div class="column content">
+            <!-- <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> -->
+            <img style="margin-top: -10px;" src="static/images/pipeline.jpg">
+
+            <div class="content has-text-justified">
+              <p>
+                <strong>Our proposed network.</strong> For each input RGB image, we first extract its DINO features, depth, and normal map. Then,
+                the RGB and depth images are inputted into the shadow removal network. The network includes several Context-aware Swin
+                Attention (CSA) layers, each comprising two Swin self-attention blocks. Unlike traditional self-attention, our block explicitly
+                involves semantic-aware and geometry-aware attention weights.
+              </p>
+            </div>
+          </div>
+          <h2 class="title is-4">Render</h2>
+
+          <!-- Interpolating. -->
+          <!-- <h3 class="title is-4">Interpolation</h3> -->
+          <div class="content has-text-justified">
+            <p>
+              The rendering results reveal the prominence and prevalence of both direct and indirect shadows in indoor scenes.
+            </p>
+            <img style="width: 960px; height: 300px;" src="static/images/render.jpg">
+          </div>
+        </div>
+      </div>
+
+
+      <br/>
+      <h2 class="title is-4">Comparison</h2>
+      <div class="content has-text-justified">
+        <p>
+          Comparing to SOTAs using INS Dataset and pictures taken from real scenes.
+        </p>
+      </div>
+      <div class="columns is-centered">
+        <!-- Visual Effects. -->
+        <div class="column is-full-width"  >
+          <div class="content">
+            <div class="columns is-centered is-mobile">
+  
+              <div class="column is-full-width">
+                <div id="compare1" class="bal-container-small">
+                  <div class="bal-after">
+                    <img src="\static\images\compare\Origin\rgb_12.png">
+                    <div class="bal-afterPosition afterLabel">
+                      Origin
+                    </div>
+                  </div>
+                
+                  <div class="bal-before">
+                    <div class="bal-before-inset">
+                    <img src="\static\images\compare\Ours\rgb_12.png">
+                      <div class="bal-beforePosition beforeLabel">
+                        Ours
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bal-handle">
+                    <span class=" handle-left-arrow"></span>
+                    <span class="handle-right-arrow"></span>
+                  </div>
+                </div>
+              <br/>
+  
+  
+                <div id="compare5" class="bal-container-small">
+                  <div class="bal-after">
+                    <img src="\static\images\compare\Origin\rgb_62.png">
+                    <div class="bal-afterPosition afterLabel">
+                      Origin
+                    </div>
+                  </div>
+                  <div class="bal-before">
+                    <div class="bal-before-inset">
+                    <img src="\static\images\compare\Ours\rgb_62.png">
+                      <div class="bal-beforePosition beforeLabel">
+                        Ours
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bal-handle">
+                    <span class=" handle-left-arrow"></span>
+                    <span class="handle-right-arrow"></span>
+                  </div>
+                </div>
+              <br/>
+  
+                <div id="compare9" class="bal-container-small">
+                  <div class="bal-after">
+                    <img src="\static\images\compare\Origin\rgb_701.png">
+                    <div class="bal-afterPosition afterLabel">
+                      Origin
+                    </div>
+                  </div>
+                  <div class="bal-before">
+                    <div class="bal-before-inset">
+                    <img src="\static\images\compare\Ours\rgb_701.png">
+                      <div class="bal-beforePosition beforeLabel">
+                        Ours
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bal-handle">
+                    <span class=" handle-left-arrow"></span>
+                    <span class="handle-right-arrow"></span>
+                  </div>
+                </div>
+              <br/>
+  
+                <div id="compare13" class="bal-container-small">
+                  <div class="bal-after">
+                    <img src="\static\images\compare\Origin\3.png">
+                    <div class="bal-afterPosition afterLabel">
+                      Origin
+                    </div>
+                  </div>
+                  <div class="bal-before">
+                    <div class="bal-before-inset">
+                    <img src="\static\images\compare\Ours\3.png">
+                      <div class="bal-beforePosition beforeLabel">
+                        Ours
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bal-handle">
+                    <span class=" handle-left-arrow"></span>
+                    <span class="handle-right-arrow"></span>
+                  </div>
+                </div>
+                <br/>
+
+                <div id="compare17" class="bal-container-middle">
+                  <div class="bal-after">
+                    <img src="\static\images\compare\Origin\2.png">
+                    <div class="bal-afterPosition afterLabel">
+                      Origin
+                    </div>
+                  </div>
+                  <div class="bal-before">
+                    <div class="bal-before-inset">
+                    <img src="\static\images\compare\Ours\2.png">
+                      <div class="bal-beforePosition beforeLabel">
+                        Ours
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bal-handle">
+                    <span class=" handle-left-arrow"></span>
+                    <span class="handle-right-arrow"></span>
+                  </div>
+                </div>
+                <br/>
+
+                <div id="compare21" class="bal-container-middle">
+                  <div class="bal-after">
+                    <img src="\static\images\compare\Origin\1.png">
+                    <div class="bal-afterPosition afterLabel">
+                      Origin
+                    </div>
+                  </div>
+                  <div class="bal-before">
+                    <div class="bal-before-inset">
+                    <img src="\static\images\compare\Ours\1.png">
+                      <div class="bal-beforePosition beforeLabel">
+                        Ours
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bal-handle">
+                    <span class=" handle-left-arrow"></span>
+                    <span class="handle-right-arrow"></span>
+                  </div>
+                </div>
+              <!-- <br/> -->
+  
+              </div>
+  
+              <div class="column is-full-width">
+                  
+                <div id="compare2" class="bal-container-small">
+                  <div class="bal-after">
+                    <img src="\static\images\compare\Origin\rgb_12.png">
+                    <div class="bal-afterPosition afterLabel">
+                      Origin
+                    </div>
+                  </div>
+                  <div class="bal-before">
+                    <div class="bal-before-inset">
+                    <img src="\static\images\compare\DMTN\rgb_12.png">
+                      <div class="bal-beforePosition beforeLabel">
+                        DMTN
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bal-handle">
+                    <span class=" handle-left-arrow"></span>
+                    <span class="handle-right-arrow"></span>
+                  </div>
+                </div>
+                <br/>
+  
+                <div id="compare6" class="bal-container-small">
+                  <div class="bal-after">
+                    <img src="\static\images\compare\Origin\rgb_62.png">
+                    <div class="bal-afterPosition afterLabel">
+                      Origin
+                    </div>
+                  </div>
+                  <div class="bal-before">
+                    <div class="bal-before-inset">
+                      <img src="\static\images\compare\DMTN\rgb_62.png">
+                      <div class="bal-beforePosition beforeLabel">
+                        DMTN
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bal-handle">
+                    <span class=" handle-left-arrow"></span>
+                    <span class="handle-right-arrow"></span>
+                  </div>
+                </div>
+                <br/>
+  
+                <div id="compare10" class="bal-container-small">
+                  <div class="bal-after">
+                    <img src="\static\images\compare\Origin\rgb_701.png">
+                    <div class="bal-afterPosition afterLabel">
+                      Origin
+                    </div>
+                  </div>
+                  <div class="bal-before">
+                    <div class="bal-before-inset">
+                      <img src="\static\images\compare\DMTN\rgb_701.png">
+                      <div class="bal-beforePosition beforeLabel">
+                        DMTN
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bal-handle">
+                    <span class=" handle-left-arrow"></span>
+                    <span class="handle-right-arrow"></span>
+                  </div>
+                </div>
+                <br/>
+  
+                <div id="compare14" class="bal-container-small">
+                  <div class="bal-after">
+                    <img src="\static\images\compare\Origin\3.png">
+                    <div class="bal-afterPosition afterLabel">
+                      Origin
+                    </div>
+                  </div>
+                  <div class="bal-before">
+                    <div class="bal-before-inset">
+                    <img src="\static\images\compare\DMTN\3.png">
+                      <div class="bal-beforePosition beforeLabel">
+                        DMTN
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bal-handle">
+                    <span class=" handle-left-arrow"></span>
+                    <span class="handle-right-arrow"></span>
+                  </div>
+                </div>
+                <br/>
+
+                <div id="compare18" class="bal-container-middle">
+                  <div class="bal-after">
+                    <img src="\static\images\compare\Origin\2.png">
+                    <div class="bal-afterPosition afterLabel">
+                      Origin
+                    </div>
+                  </div>
+                  <div class="bal-before">
+                    <div class="bal-before-inset">
+                    <img src="\static\images\compare\DMTN\2.png">
+                      <div class="bal-beforePosition beforeLabel">
+                        DMTN
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bal-handle">
+                    <span class=" handle-left-arrow"></span>
+                    <span class="handle-right-arrow"></span>
+                  </div>
+                </div>
+                <br/>
+
+
+                <div id="compare22" class="bal-container-middle">
+                  <div class="bal-after">
+                    <img src="\static\images\compare\Origin\1.png">
+                    <div class="bal-afterPosition afterLabel">
+                      Origin
+                    </div>
+                  </div>
+                  <div class="bal-before">
+                    <div class="bal-before-inset">
+                    <img src="\static\images\compare\DMTN\1.png">
+                      <div class="bal-beforePosition beforeLabel">
+                        DMTN
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bal-handle">
+                    <span class=" handle-left-arrow"></span>
+                    <span class="handle-right-arrow"></span>
+                  </div>
+                </div>
+                <!-- <br/> -->
+              </div>
+  
+              <div class="column is-full-width">
+                  
+                <div id="compare3" class="bal-container-small">
+                  <div class="bal-after">
+                    <img src="\static\images\compare\Origin\rgb_12.png">
+                    <div class="bal-afterPosition afterLabel">
+                      Origin
+                    </div>
+                  </div>
+                  <div class="bal-before">
+                    <div class="bal-before-inset">
+                    <img src="\static\images\compare\ShadowDiffusion\rgb_12.png">
+                      <div class="bal-beforePosition beforeLabel"  style="font-size: 50%;">
+                        ShadowDiffusion
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bal-handle">
+                    <span class=" handle-left-arrow"></span>
+                    <span class="handle-right-arrow"></span>
+                  </div>
+                </div>
+                <br/>
+  
+                <div id="compare7" class="bal-container-small">
+                  <div class="bal-after">
+                    <img src="\static\images\compare\Origin\rgb_62.png">
+                    <div class="bal-afterPosition afterLabel">
+                      Origin
+                    </div>
+                  </div>
+                  <div class="bal-before">
+                    <div class="bal-before-inset">
+                      <img src="\static\images\compare\ShadowDiffusion\rgb_62.png">
+                      <div class="bal-beforePosition beforeLabel"  style="font-size: 50%;">
+                        ShadowDiffusion
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bal-handle">
+                    <span class=" handle-left-arrow"></span>
+                    <span class="handle-right-arrow"></span>
+                  </div>
+                </div>
+                <br/>
+  
+                <div id="compare11" class="bal-container-small">
+                  <div class="bal-after">
+                    <img src="\static\images\compare\Origin\rgb_701.png">
+                    <div class="bal-afterPosition afterLabel">
+                      Origin
+                    </div>
+                  </div>
+                  <div class="bal-before">
+                    <div class="bal-before-inset">
+                      <img src="\static\images\compare\ShadowDiffusion\rgb_701.png">
+                      <div class="bal-beforePosition beforeLabel"  style="font-size: 50%;">
+                        ShadowDiffusion
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bal-handle">
+                    <span class=" handle-left-arrow"></span>
+                    <span class="handle-right-arrow"></span>
+                  </div>
+                </div>
+                <br/>
+  
+                <div id="compare15" class="bal-container-small">
+                  <div class="bal-after">
+                    <img src="\static\images\compare\Origin\3.png">
+                    <div class="bal-afterPosition afterLabel">
+                      Origin
+                    </div>
+                  </div>
+                  <div class="bal-before">
+                    <div class="bal-before-inset">
+                    <img src="\static\images\compare\ShadowDiffusion\3.png">
+                      <div class="bal-beforePosition beforeLabel"  style="font-size: 50%;">
+                        ShadowDiffusion
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bal-handle">
+                    <span class=" handle-left-arrow"></span>
+                    <span class="handle-right-arrow"></span>
+                  </div>
+                </div>
+                <br />
+
+                <div id="compare19" class="bal-container-middle">
+                  <div class="bal-after">
+                    <img src="\static\images\compare\Origin\2.png">
+                    <div class="bal-afterPosition afterLabel">
+                      Origin
+                    </div>
+                  </div>
+                  <div class="bal-before">
+                    <div class="bal-before-inset">
+                    <img src="\static\images\compare\ShadowDiffusion\2.png">
+                      <div class="bal-beforePosition beforeLabel"  style="font-size: 50%;">
+                        ShadowDiffusion
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bal-handle">
+                    <span class=" handle-left-arrow"></span>
+                    <span class="handle-right-arrow"></span>
+                  </div>
+                </div>
+                <br />
+
+                <div id="compare23" class="bal-container-middle">
+                  <div class="bal-after">
+                    <img src="\static\images\compare\Origin\1.png">
+                    <div class="bal-afterPosition afterLabel">
+                      Origin
+                    </div>
+                  </div>
+                  <div class="bal-before">
+                    <div class="bal-before-inset">
+                    <img src="\static\images\compare\ShadowDiffusion\1.png">
+                      <div class="bal-beforePosition beforeLabel"  style="font-size: 50%;">
+                        ShadowDiffusion
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bal-handle">
+                    <span class=" handle-left-arrow"></span>
+                    <span class="handle-right-arrow"></span>
+                  </div>
+                </div>
+                <!-- <br/> -->
+              </div>
+
+              <div class="column is-full-width">
+                  
+                <div id="compare4" class="bal-container-small">
+                  <div class="bal-after">
+                    <img src="\static\images\compare\Origin\rgb_12.png">
+                    <div class="bal-afterPosition afterLabel">
+                      Origin
+                    </div>
+                  </div>
+                  <div class="bal-before">
+                    <div class="bal-before-inset">
+                    <img src="\static\images\compare\ShadowFormer\rgb_12.png">
+                      <div class="bal-beforePosition beforeLabel"  style="font-size: 50%;">
+                        ShadowFormer
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bal-handle">
+                    <span class=" handle-left-arrow"></span>
+                    <span class="handle-right-arrow"></span>
+                  </div>
+                </div>
+                <br/>
+  
+                <div id="compare8" class="bal-container-small">
+                  <div class="bal-after">
+                    <img src="\static\images\compare\Origin\rgb_62.png">
+                    <div class="bal-afterPosition afterLabel">
+                      Origin
+                    </div>
+                  </div>
+                  <div class="bal-before">
+                    <div class="bal-before-inset">
+                      <img src="\static\images\compare\ShadowFormer\rgb_62.png">
+                        <div class="bal-beforePosition beforeLabel" style="font-size: 50%;">
+                        ShadowFormer
+                        </div>
+                    </div>
+                  </div>
+                  <div class="bal-handle">
+                    <span class=" handle-left-arrow"></span>
+                    <span class="handle-right-arrow"></span>
+                  </div>
+                </div>
+                <br/>
+  
+                <div id="compare12" class="bal-container-small">
+                  <div class="bal-after">
+                    <img src="\static\images\compare\Origin\rgb_701.png">
+                    <div class="bal-afterPosition afterLabel">
+                      Origin
+                    </div>
+                  </div>
+                  <div class="bal-before">
+                    <div class="bal-before-inset">
+                      <img src="\static\images\compare\ShadowFormer\rgb_701.png">
+                      <div class="bal-beforePosition beforeLabel"  style="font-size: 50%;">
+                        ShadowFormer
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bal-handle">
+                    <span class=" handle-left-arrow"></span>
+                    <span class="handle-right-arrow"></span>
+                  </div>
+                </div>
+                <br/>
+  
+                <div id="compare16" class="bal-container-small">
+                  <div class="bal-after">
+                    <img src="\static\images\compare\Origin\3.png">
+                    <div class="bal-afterPosition afterLabel">
+                      Origin
+                    </div>
+                  </div>
+                  <div class="bal-before">
+                    <div class="bal-before-inset">
+                    <img src="\static\images\compare\ShadowFormer\3.png">
+                      <div class="bal-beforePosition beforeLabel"  style="font-size: 50%;">
+                        ShadowFormer
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bal-handle">
+                    <span class=" handle-left-arrow"></span>
+                    <span class="handle-right-arrow"></span>
+                  </div>
+                </div>
+                <br/>
+
+                <div id="compare20" class="bal-container-middle">
+                  <div class="bal-after">
+                    <img src="\static\images\compare\Origin\2.png">
+                    <div class="bal-afterPosition afterLabel">
+                      Origin
+                    </div>
+                  </div>
+                  <div class="bal-before">
+                    <div class="bal-before-inset">
+                    <img src="\static\images\compare\ShadowFormer\2.png">
+                      <div class="bal-beforePosition beforeLabel"  style="font-size: 50%;">
+                        ShadowFormer
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bal-handle">
+                    <span class=" handle-left-arrow"></span>
+                    <span class="handle-right-arrow"></span>
+                  </div>
+                </div>
+                <br/>
+
+                <div id="compare24" class="bal-container-middle">
+                  <div class="bal-after">
+                    <img src="\static\images\compare\Origin\1.png">
+                    <div class="bal-afterPosition afterLabel">
+                      Origin
+                    </div>
+                  </div>
+                  <div class="bal-before">
+                    <div class="bal-before-inset">
+                    <img src="\static\images\compare\ShadowFormer\1.png">
+                      <div class="bal-beforePosition beforeLabel"  style="font-size: 50%;">
+                        ShadowFormer
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bal-handle">
+                    <span class=" handle-left-arrow"></span>
+                    <span class="handle-right-arrow"></span>
+                  </div>
+                </div>
+                <!-- <br/> -->
+              </div>
+
+
+              
+            </div>
+          </div>
+        </div>
+        
+      </div>
+  
+
+
+      <!-- <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-4">Ohter...</h2>
+
+        <h3 class="title is-4">title...</h3>
+        <div class="content has-text-justified">
+          <p>
+            text...
+          </p>
+        </div>
+        
+
+      </div>
+    </div> -->
+
+
+
+
+
+
+
+
+      <br />
+      <!-- <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-4">Related Work</h2>
+
+          <div class="content has-text-justified">
+            <p style="font-size: 90%;">
+              <a href="https://surfsplatting.github.io/">[Huang et al. 2024]</a> 2DGS: 2D Gaussian Splatting for
+              Geometrically Accurate Radiance Fields.
+            </p>
+            <p style="font-size: 90%;">
+              <a href="https://github.com/Anttwo/SuGaR">[Guédon et al. 2024]</a> SuGaR: Surface-Aligned Gaussian
+              Splatting for Efficient 3D Mesh Reconstruction and High-Quality Mesh Rendering.
+            </p>
+            <p style="font-size: 90%;">
+              <a href="https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/">[Kerbl et al. 2023]</a> 3D Gaussian
+              Splatting for Real-Time Radiance Field Rendering.
+            </p>
+            <p style="font-size: 90%;">
+              <a href="https://vcai.mpi-inf.mpg.de/projects/NeuS2/">[Wang et al. 2023]</a> NeuS2: Fast Learning of
+              Neural Implicit Surfaces for Multi-view Reconstruction.
+            </p>
+            <p style="font-size: 90%;">
+              <a href="https://lingjie0206.github.io/papers/NeuS/">[Wang et al. 2021]</a> NeuS: Learning Neural Implicit
+              Surfaces by Volume Rendering for Multi-view Reconstruction.
+            </p>
+            <p style="font-size: 90%;">
+              <a href="https://github.com/yifita/DSS">[Yifan et al. 2019]</a> Differentiable Surface Splatting for
+              Point-based Geometry Processing.
+            </p>
+            <p style="font-size: 90%;">
+              <a href="https://cgl.ethz.ch/research/past_projects/surfels/surfacesplatting/index.html">[Zwicker et al.
+                2001]</a> Surface Splatting.
+            </p>
+            <p style="font-size: 90%;">
+              <a href="https://cgl.ethz.ch/research/past_projects/surfels/surfels/index.html">[Pfister et al. 2000]</a>
+              Surfels: Surface Elements as Rendering Primitives.
+            </p>
+          </div>
+        </div>
+      </div> -->
+      <!--/ Concurrent Work. -->
+
+    </div>
+  </section>
+
+
+  <!-- <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title is-4">BibTeX</h2>
+      <pre><code>@inproceedings{Dai2024GaussianSurfels,
+  author = {Dai, Pinxuan and Xu, Jiamin and Xie, Wenxiang and Liu, Xinguo and Wang, Huamin and Xu, Weiwei},
+  title = {High-quality Surface Reconstruction using Gaussian Surfels},
+  publisher = {Association for Computing Machinery},
+  booktitle = {ACM SIGGRAPH 2024 Conference Papers},
+  year = {2024},
+  articleno = {22},
+  numpages = {11}
+}</code></pre>
+    </div>
+  </section> -->
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <p>
+          This page is modified from the <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a> template.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="static/js/script.js"></script>
+  <script>
+    new BeforeAfter({
+      id: '#compare1'
+    });
+    new BeforeAfter({
+      id: '#compare2'
+    });
+    new BeforeAfter({
+      id: '#compare3'
+    });
+    new BeforeAfter({
+      id: '#compare4'
+    });
+    new BeforeAfter({
+      id: '#compare5'
+    });
+    new BeforeAfter({
+      id: '#compare6'
+    });
+    new BeforeAfter({
+      id: '#compare7'
+    });
+    new BeforeAfter({
+      id: '#compare8'
+    });
+    new BeforeAfter({
+      id: '#compare9'
+    });
+    new BeforeAfter({
+      id: '#compare10'
+    });
+    new BeforeAfter({
+      id: '#compare11'
+    });
+    new BeforeAfter({
+      id: '#compare12'
+    });
+    new BeforeAfter({
+      id: '#compare13'
+    });
+    new BeforeAfter({
+      id: '#compare14'
+    });
+    new BeforeAfter({
+      id: '#compare15'
+    });
+    new BeforeAfter({
+      id: '#compare16'
+    });
+    new BeforeAfter({
+      id: '#compare17'
+    });
+    new BeforeAfter({
+      id: '#compare18'
+    });
+    new BeforeAfter({
+      id: '#compare19'
+    });
+    new BeforeAfter({
+      id: '#compare20'
+    });
+    new BeforeAfter({
+      id: '#compare21'
+    });
+    new BeforeAfter({
+      id: '#compare22'
+    });
+    new BeforeAfter({
+      id: '#compare23'
+    });
+    new BeforeAfter({
+      id: '#compare24'
+    });
+
+   
+  </script>
+
+</body>
+
+</html>
