@@ -1,6 +1,6 @@
 class BeforeAfter {
     constructor(enteryObject) {
-
+        console.log("before after");
         const beforeAfterContainer = document.querySelector(enteryObject.id);
         const before = beforeAfterContainer.querySelector('.bal-before');
         const beforeText = beforeAfterContainer.querySelector('.bal-beforePosition');
@@ -16,30 +16,25 @@ class BeforeAfter {
         handle.setAttribute('style', "left: 50%;");
 
         //touch screen event listener
-        beforeAfterContainer.addEventListener("touchstart", (e) => {
-            beforeAfterContainer.addEventListener("touchmove", (e2) => {
-                let containerWidth = beforeAfterContainer.offsetWidth;
-                let currentPoint = e2.changedTouches[0].clientX;
+        // beforeAfterContainer.addEventListener("touchstart", (e) => {
+        //     console.log("left:"  );
+        //     beforeAfterContainer.addEventListener("touchmove", (e2) => {
+        //         let containerWidth = beforeAfterContainer.offsetWidth;
+        //         let currentPoint = e2.changedTouches[0].clientX;
 
-                let startOfDiv = beforeAfterContainer.offsetLeft;
+        //         let startOfDiv = beforeAfterContainer.offsetLeft;
 
-                let modifiedCurrentPoint = currentPoint - startOfDiv;
+        //         let modifiedCurrentPoint = currentPoint - startOfDiv;
 
-                if (modifiedCurrentPoint > 20 && modifiedCurrentPoint < beforeAfterContainer.offsetWidth - 20) {
-                    let newWidth = modifiedCurrentPoint * 100 / containerWidth;
+        //         if (modifiedCurrentPoint > 20 && modifiedCurrentPoint < beforeAfterContainer.offsetWidth - 20) {
+        //             let newWidth = modifiedCurrentPoint * 100 / containerWidth;
 
-                    before.setAttribute('style', "width:" + newWidth + "%;");
-                    afterText.setAttribute('style', "z-index: 1;");
-                    handle.setAttribute('style', "left:" + newWidth + "%;");
-                }
-            });
-        });
-
-        // beforeAfterContainer.addEventListener('mousedown', (e) => {
-        //     isDragging = true;
+        //             before.setAttribute('style', "width:" + newWidth + "%;");
+        //             afterText.setAttribute('style', "z-index: 1;");
+        //             handle.setAttribute('style', "left:" + newWidth + "%;");
+        //         }
+        //     });
         // });
-
-
 
         //mouse move event listener
         beforeAfterContainer.addEventListener('mousemove', (e) => {
@@ -47,7 +42,7 @@ class BeforeAfter {
                 let containerWidth = beforeAfterContainer.offsetWidth;
                 widthChange = e.offsetX;
                 let newWidth = widthChange * 100 / containerWidth;
-                if (e.offsetX > 20 && e.offsetX < beforeAfterContainer.offsetWidth - 20) {
+                if (e.offsetX > 5 && e.offsetX < beforeAfterContainer.offsetWidth - 5) {
                     before.setAttribute('style', "width:" + newWidth + "%;");
                     afterText.setAttribute('style', "z-index:" + "1;");
                     handle.setAttribute('style', "left:" + newWidth + "%;");
