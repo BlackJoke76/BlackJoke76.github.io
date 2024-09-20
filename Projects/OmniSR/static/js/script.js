@@ -42,7 +42,7 @@ class BeforeAfter {
                 let containerWidth = beforeAfterContainer.offsetWidth;
                 widthChange = e.offsetX;
                 let newWidth = widthChange * 100 / containerWidth;
-                if (e.offsetX > 5 && e.offsetX < beforeAfterContainer.offsetWidth - 5) {
+                if (e.offsetX   && e.offsetX < beforeAfterContainer.offsetWidth) {
                     before.setAttribute('style', "width:" + newWidth + "%;");
                     afterText.setAttribute('style', "z-index:" + "1;");
                     handle.setAttribute('style', "left:" + newWidth + "%;");
